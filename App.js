@@ -8,8 +8,7 @@ const env = process.NODE_ENV || 'development'
 const BodyParser = require('body-parser')
 const config = require('./Config.json')[env]
 
-// const Usuario = require('./models/Usuario')
-// const Projeto = require('./models/Projeto')
+const usuario = require('./models/Usuario')
 
 class App{
 
@@ -26,20 +25,20 @@ class App{
         this.app.use(Cors())
 
         //chamando o DB
-        Mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@${config.db.url}/${config.db.name}`, { useNewUrlParser: true})
+        // Mongoose.connect( { useNewUrlParser: true})
+        Mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@${config.db.url}/${config.db.name}`, { useNewUrlParser: true, useUnifiedTopology: true })
+            .then(()=> console.log('Database Connection Successful!!'))
+            .catch(err => console.error(err));
 
         //Chamando as entidades (inserir aqui todas as entidades: cliente, usuário, departamentos, etc...)
-        // new Projeto()
-        // new Usuario()
+        new usuario()
 
         //Importando as rotas (inserir aqui todas as rotas das entidades: clienteRota, usuárioRota, etc...)
-        // const ProjetosRoute = require('./routes/ProjetosRoute')
-        // const UsuariosRoute = require('./routes/UsuariosRoute')
+        const usuarioRoute = require('./routes/UsuarioRoute')
 
         //instanciando o objeto responsável por definir as rotas (instanciar aqui todas os objetos que 
         // definem as rotas)
-        // new ProjetosRoute(this.app)
-        // new UsuariosRoute(this.app)
+        new usuarioRoute(this.app)
 
         //Define a rota e o handler da rota raiz (/) da API
         this.app.get('/', function(req, res){
