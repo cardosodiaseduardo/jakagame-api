@@ -48,18 +48,20 @@ class usuarioController{
 
     static async adicionarUsuario(req, res){
         try{
-            let usuarioJaEhCadastrado = await usuario.findOne({ nome, email, senha })
-            if(usuarioJaEhCadastrado != {}){
-                res.status(200).send("Usuario já cadastrado")
-            }
-            else {
+            let email = req.body.email
+            let usuarioJaEhCadastrado = await usuario.findOne({ email })
+            
+            if(usuarioJaEhCadastrado === {} || usuarioJaEhCadastrado === null || usuarioJaEhCadastrado === undefined){
                 let novoUsuario = await usuario.create(req.body)
                 res.status(200).json(novoUsuario)
+            }
+            else {
+                res.status(200).send("Usuario já cadastrado")
             }
 
         } catch(error){
             console.log("Erro ao salvar usuario: " + error)
-            res.status(500).send("Erro ao adicionar usuario!")
+            res.status(500).send("Algum erro inesperado ocorreu, por favor, informe o adm!")
         }
     }
 
@@ -91,6 +93,22 @@ class usuarioController{
         }catch(error){
             res.status(200).send("Erro ao editar Usuario!")
         }
+    }
+
+    static async contagemDeVezesJogadas(req, res){
+        try{
+            
+            let _id = req.body._id
+            let usuarioNovo = await usuario.findById( _id )
+            usuarioNovo.contador = usuarioNovo.contador + 1
+            let usuarioContado = await usuario.findByIdAndUpdate(_id, usuarioNovo)
+            console.log("usuarioContado é: " + JSON.stringify(usuarioContado))
+            res.status(200).json(usuarioContado)
+        }catch(error){
+            console.log(error)
+            res.status(500).send("Erro ao fazer contagem das vezes jogadas, informe ao adm!")
+        }
+
     }
 
 }

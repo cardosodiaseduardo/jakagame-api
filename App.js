@@ -27,7 +27,7 @@ class App{
         //chamando o DB
         // Mongoose.connect( { useNewUrlParser: true})
         Mongoose.connect(`mongodb+srv://${config.db.user}:${config.db.password}@${config.db.url}/${config.db.name}`, { useNewUrlParser: true, useUnifiedTopology: true })
-            .then(()=> console.log('Database Connection Successful!!'))
+            .then(() => console.log('ok!'))
             .catch(err => console.error(err));
 
         //Chamando as entidades (inserir aqui todas as entidades: cliente, usuário, departamentos, etc...)

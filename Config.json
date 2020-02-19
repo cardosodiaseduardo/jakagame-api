@@ -2,8 +2,8 @@
     "development" : {
         "port": 8000,
         "db" : {
-            "name" : "flame1",
-            "url" : "flame1-ghnii.mongodb.net",
+            "name" : "Jakagame",
+            "url" : "aplications-o3v3x.mongodb.net",
             "user" : "cardosodiaseduardo",
             "password" : "123456campanha"
         },

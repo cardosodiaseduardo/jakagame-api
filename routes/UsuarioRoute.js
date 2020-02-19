@@ -19,6 +19,8 @@ class usuarioRoute {
         app.route('/usuarioporid')
             .post(usuarioController.buscarUsuarioPorId)
 
+        app.route('/playertime')
+            .post(usuarioController.contagemDeVezesJogadas)
         // app.route('/deletaraluno')
             // .post(alunoController.deletarAluno)
         

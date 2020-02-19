@@ -19,6 +19,9 @@ class usuario extends mongoose.Schema{
                 type: String,
                 required: true
             },
+            contador: {
+                type: Number
+            }
 
         });
 
