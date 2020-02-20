@@ -80,18 +80,15 @@ class usuarioController{
             let senha = req.body.senha
             
             let usuarioAEditar = await usuario.findOne({ email, senha })
-            console.log("usuarioAEditar é: " + JSON.stringify(usuarioAEditar))
             
-            console.log("usuarioAEditar._id é: " + usuarioAEditar._id)
             let usuarioEditado = await usuario.findByIdAndUpdate(usuarioAEditar._id, req.body)
             let _id = usuarioEditado._id
             
             let novoUsuario = await usuario.findOne({ _id })
-            console.log("novoUsuario é: " + JSON.stringify(novoUsuario))
             
-            res.status(500).json(novoUsuario)
+            res.status(200).json(novoUsuario)
         }catch(error){
-            res.status(200).send("Erro ao editar Usuario!")
+            res.status(500).send("Erro ao editar Usuario!")
         }
     }
 
