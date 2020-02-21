@@ -99,7 +99,6 @@ class usuarioController{
             let usuarioNovo = await usuario.findById( _id )
             usuarioNovo.contador = usuarioNovo.contador + 1
             let usuarioContado = await usuario.findByIdAndUpdate(_id, usuarioNovo)
-            console.log("usuarioContado é: " + JSON.stringify(usuarioContado))
             res.status(200).json(usuarioContado)
         }catch(error){
             console.log(error)
