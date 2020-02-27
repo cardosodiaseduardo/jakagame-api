@@ -21,11 +21,9 @@ class usuarioRoute {
 
         app.route('/playertime')
             .post(usuarioController.contagemDeVezesJogadas)
-        // app.route('/deletaraluno')
-            // .post(alunoController.deletarAluno)
         
-        // app.route('/matricular')
-            // .post(alunoController.matricularAluno)
+        app.route('/playermore')
+            .post(usuarioController.contagemDeVezesJogadasDoAnonimo)
     }
 }
 

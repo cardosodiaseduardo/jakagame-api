@@ -107,6 +107,19 @@ class usuarioController{
 
     }
 
+    static async contagemDeVezesJogadasDoAnonimo(req, res){
+        try{
+            let _id = req.body._id
+            let usuarioAnonimo = await usuario.findById( _id )
+            usuarioAnonimo.contador = usuarioAnonimo.contador + 1
+            let usuarioAnonimoAcrescido = await usuario.findByIdAndUpdate (_id, usuarioAnonimo)
+            res.status(200).json(usuarioAnonimoAcrescido)
+        }catch(error){
+            console.log(error)
+            res.status(500).send("Erro ao salvar mais uma contagem de acesso no anônimo!")
+        }
+    }
+
 }
 
 module.exports = usuarioController
